@@ -41,6 +41,8 @@ public class PasswordPolicy implements Serializable {
 
     public static final String PASSWORD_HISTORY_ID = "passwordHistory";
 
+    public static final String PASSWORD_LIFESPAN_ID = "minimumLifespanPassword";
+
     public static final String FORCE_EXPIRED_ID = "forceExpiredPasswordChange";
 
     private Map<String, Object> policyConfig;
@@ -90,6 +92,16 @@ public class PasswordPolicy implements Serializable {
     public int getExpiredPasswords() {
         if (policyConfig.containsKey(PASSWORD_HISTORY_ID)) {
             return getPolicyConfig(PASSWORD_HISTORY_ID);
+        } else if (policyConfig.containsKey(PASSWORD_LIFESPAN_ID)) {
+            return 2;
+        } else {
+            return -1;
+        }
+    }
+
+    public int getLifespanPassword() {
+        if (policyConfig.containsKey(PASSWORD_LIFESPAN_ID)) {
+            return getPolicyConfig(PASSWORD_LIFESPAN_ID);
         } else {
             return -1;
         }
